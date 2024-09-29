@@ -8,14 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
-import ua.privat.paymantbusinesslogicservice.dto.RegularPaymentDTO;
 import ua.privat.paymantbusinesslogicservice.dto.WiringDTO;
 import ua.privat.paymantbusinesslogicservice.exceptions.ServiceErrorException;
-import ua.privat.paymantbusinesslogicservice.model.Wiring;
 
-import java.sql.Timestamp;
-import java.util.List;
-import java.util.stream.StreamSupport;
 
 @Service
 @RequiredArgsConstructor

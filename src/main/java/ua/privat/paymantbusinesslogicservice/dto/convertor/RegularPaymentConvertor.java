@@ -3,8 +3,6 @@ package ua.privat.paymantbusinesslogicservice.dto.convertor;
 import org.springframework.stereotype.Component;
 import ua.privat.paymantbusinesslogicservice.model.RegularPayment;
 
-import java.sql.Timestamp;
-
 @Component
 public class RegularPaymentConvertor implements Converter<RegularPayment, ua.privat.paymantbusinesslogicservice.dto.RegularPaymentDTO> {
 
