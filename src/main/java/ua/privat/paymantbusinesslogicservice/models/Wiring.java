@@ -1,4 +1,4 @@
-package ua.privat.paymantbusinesslogicservice.model;
+package ua.privat.paymantbusinesslogicservice.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

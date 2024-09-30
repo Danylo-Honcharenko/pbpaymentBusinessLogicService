@@ -2,7 +2,7 @@ package ua.privat.paymantbusinesslogicservice.dto.convertor;
 
 import org.springframework.stereotype.Component;
 import ua.privat.paymantbusinesslogicservice.dto.WiringDTO;
-import ua.privat.paymantbusinesslogicservice.model.Wiring;
+import ua.privat.paymantbusinesslogicservice.models.Wiring;
 
 @Component
 public class WiringConverter implements Converter<Wiring, WiringDTO> {

@@ -33,4 +33,9 @@ public class FieldValidate {
     public ResponseEntity<String> outOfBoundsAllowedChars(OutOfBoundsAllowedCharsException outOfBoundsAllowedCharsException) {
         return ResponseEntity.badRequest().body(outOfBoundsAllowedCharsException.getMessage());
     }
+
+    @ExceptionHandler(ViolationOfStructureException.class)
+    public ResponseEntity<String> violationOfStructure(ViolationOfStructureException violationOfStructureException) {
+        return ResponseEntity.badRequest().body(violationOfStructureException.getMessage());
+    }
 }

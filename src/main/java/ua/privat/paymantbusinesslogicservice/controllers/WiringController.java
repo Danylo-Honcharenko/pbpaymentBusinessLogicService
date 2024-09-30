@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ua.privat.paymantbusinesslogicservice.dto.WiringDTO;
 import ua.privat.paymantbusinesslogicservice.dto.convertor.WiringConverter;
-import ua.privat.paymantbusinesslogicservice.model.Wiring;
+import ua.privat.paymantbusinesslogicservice.models.Wiring;
 import ua.privat.paymantbusinesslogicservice.vilidators.Valid;
 import ua.privat.paymantbusinesslogicservice.services.WiringService;
 

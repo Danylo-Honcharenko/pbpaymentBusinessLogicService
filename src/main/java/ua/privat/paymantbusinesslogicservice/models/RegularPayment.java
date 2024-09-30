@@ -1,10 +1,14 @@
-package ua.privat.paymantbusinesslogicservice.model;
+package ua.privat.paymantbusinesslogicservice.models;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 public class RegularPayment {
     private Integer id;
     private String payerFullName;
@@ -15,5 +19,6 @@ public class RegularPayment {
     private Integer okpoRecipient;
     private String recipientName;
     private String writeOffPeriod;
+    private String writeOffDate;
     private Integer paymentAmount;
 }

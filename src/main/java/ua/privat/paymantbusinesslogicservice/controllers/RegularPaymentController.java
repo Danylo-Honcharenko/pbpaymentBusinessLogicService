@@ -7,7 +7,7 @@ import ua.privat.paymantbusinesslogicservice.dto.RegularPaymentDTO;
 import ua.privat.paymantbusinesslogicservice.dto.WiringDTO;
 import ua.privat.paymantbusinesslogicservice.dto.convertor.RegularPaymentConvertor;
 import ua.privat.paymantbusinesslogicservice.exceptions.RegularPaymentsNotFoundException;
-import ua.privat.paymantbusinesslogicservice.model.RegularPayment;
+import ua.privat.paymantbusinesslogicservice.models.RegularPayment;
 import ua.privat.paymantbusinesslogicservice.services.RegularPaymentService;
 import ua.privat.paymantbusinesslogicservice.vilidators.Valid;
 

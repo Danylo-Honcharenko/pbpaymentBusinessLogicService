@@ -1,13 +1,14 @@
 package ua.privat.paymantbusinesslogicservice.dto.convertor;
 
 import org.springframework.stereotype.Component;
-import ua.privat.paymantbusinesslogicservice.model.RegularPayment;
+import ua.privat.paymantbusinesslogicservice.dto.RegularPaymentDTO;
+import ua.privat.paymantbusinesslogicservice.models.RegularPayment;
 
 @Component
-public class RegularPaymentConvertor implements Converter<RegularPayment, ua.privat.paymantbusinesslogicservice.dto.RegularPaymentDTO> {
+public class RegularPaymentConvertor implements Converter<RegularPayment, RegularPaymentDTO> {
 
     @Override
-    public RegularPayment convertToModel(ua.privat.paymantbusinesslogicservice.dto.RegularPaymentDTO regularPaymentDTO) {
+    public RegularPayment convertToModel(RegularPaymentDTO regularPaymentDTO) {
         return RegularPayment.builder()
                 .id(regularPaymentDTO.getId())
                 .payerFullName(regularPaymentDTO.getPayerFullName())
@@ -18,13 +19,14 @@ public class RegularPaymentConvertor implements Converter<RegularPayment, ua.pri
                 .okpoRecipient(regularPaymentDTO.getOkpoRecipient())
                 .recipientName(regularPaymentDTO.getRecipientName())
                 .writeOffPeriod(regularPaymentDTO.getWriteOffPeriod())
+                .writeOffDate(regularPaymentDTO.getWriteOffDate())
                 .paymentAmount(regularPaymentDTO.getPaymentAmount())
                 .build();
     }
 
     @Override
-    public ua.privat.paymantbusinesslogicservice.dto.RegularPaymentDTO convertToDTO(RegularPayment regularPayment) {
-        return ua.privat.paymantbusinesslogicservice.dto.RegularPaymentDTO.builder()
+    public RegularPaymentDTO convertToDTO(RegularPayment regularPayment) {
+        return RegularPaymentDTO.builder()
                 .id(regularPayment.getId())
                 .payerFullName(regularPayment.getPayerFullName())
                 .iin(regularPayment.getIin())
@@ -34,6 +36,7 @@ public class RegularPaymentConvertor implements Converter<RegularPayment, ua.pri
                 .okpoRecipient(regularPayment.getOkpoRecipient())
                 .recipientName(regularPayment.getRecipientName())
                 .writeOffPeriod(regularPayment.getWriteOffPeriod())
+                .writeOffDate(regularPayment.getWriteOffDate())
                 .paymentAmount(regularPayment.getPaymentAmount())
                 .build();
     }
