@@ -42,7 +42,7 @@ public class RegularPaymentService {
                         error -> Mono.error(new ServiceErrorException("The service returned an error with status code 4xx. More details: status code " + error.statusCode().value() + " error URL " + error.request().getURI())))
                 .bodyToFlux(RegularPaymentDTO.class)
                 .filter(regularPaymentDTO -> new Timestamp(System.currentTimeMillis())
-                                .compareTo(Timestamp.valueOf(regularPaymentDTO.getWriteOffPeriod())) == 1)
+                                .compareTo(Timestamp.valueOf(regularPaymentDTO.getWriteOffDate())) == 1)
                 .toIterable();
 
         return StreamSupport.stream(regularPaymentDtoS.spliterator(), false)
