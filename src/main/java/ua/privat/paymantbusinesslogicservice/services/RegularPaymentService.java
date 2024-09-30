@@ -89,7 +89,7 @@ public class RegularPaymentService {
                         && wiringDTO.getStatus().equals("A"))
                 .toIterable();
 
-        return StreamSupport.stream(wiringDtoS.spliterator(), true)
+        return StreamSupport.stream(wiringDtoS.spliterator(), false)
                 .toList();
     }
 }
