@@ -3,7 +3,7 @@ package ua.privat.paymantbusinesslogicservice.services.impl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import ua.privat.PaymentApiUtilI;
+import ua.privat.clientlib.utils.PaymentApiUtilI;
 import ua.privat.paymantbusinesslogicservice.services.WiringServiceI;
 import ua.privat.utils.dto.WiringDTO;
 

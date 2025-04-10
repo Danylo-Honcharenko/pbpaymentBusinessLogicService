@@ -4,7 +4,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.reactive.function.client.WebClientRequestException;
-import ua.privat.exception.PaymentApiException;
+import ua.privat.clientlib.exception.PaymentApiException;
 import ua.privat.paymantbusinesslogicservice.exceptions.ServiceErrorException;
 
 @ControllerAdvice
