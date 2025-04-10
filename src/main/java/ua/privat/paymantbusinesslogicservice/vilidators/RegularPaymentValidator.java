@@ -2,7 +2,7 @@ package ua.privat.paymantbusinesslogicservice.vilidators;
 
 import org.springframework.stereotype.Component;
 import ua.privat.paymantbusinesslogicservice.exceptions.*;
-import ua.privat.paymantbusinesslogicservice.models.RegularPayment;
+import ua.privat.utils.models.RegularPayment;
 
 
 @Component

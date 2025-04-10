@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 import ua.privat.paymantbusinesslogicservice.exceptions.FieldIsEmptyException;
 import ua.privat.paymantbusinesslogicservice.exceptions.MinimumValuePaymentAmountException;
 import ua.privat.paymantbusinesslogicservice.exceptions.OutOfBoundsAllowedCharsException;
-import ua.privat.paymantbusinesslogicservice.models.Wiring;
+import ua.privat.utils.models.Wiring;
 
 @Component
 public class WiringValidator implements Valid<Wiring> {

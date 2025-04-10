@@ -3,13 +3,13 @@ package ua.privat.paymantbusinesslogicservice.controllers;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ua.privat.paymantbusinesslogicservice.dto.RegularPaymentDTO;
-import ua.privat.paymantbusinesslogicservice.dto.WiringDTO;
-import ua.privat.paymantbusinesslogicservice.dto.convertor.RegularPaymentConvertor;
 import ua.privat.paymantbusinesslogicservice.exceptions.RegularPaymentsNotFoundException;
-import ua.privat.paymantbusinesslogicservice.models.RegularPayment;
-import ua.privat.paymantbusinesslogicservice.services.RegularPaymentService;
+import ua.privat.paymantbusinesslogicservice.services.impl.RegularPaymentService;
 import ua.privat.paymantbusinesslogicservice.vilidators.Valid;
+import ua.privat.utils.dto.RegularPaymentDTO;
+import ua.privat.utils.dto.WiringDTO;
+import ua.privat.utils.dto.convertor.RegularPaymentConvertor;
+import ua.privat.utils.models.RegularPayment;
 
 import java.util.List;
 

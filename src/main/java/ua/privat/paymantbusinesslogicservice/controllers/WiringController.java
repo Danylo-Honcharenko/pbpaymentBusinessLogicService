@@ -3,11 +3,11 @@ package ua.privat.paymantbusinesslogicservice.controllers;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ua.privat.paymantbusinesslogicservice.dto.WiringDTO;
-import ua.privat.paymantbusinesslogicservice.dto.convertor.WiringConverter;
-import ua.privat.paymantbusinesslogicservice.models.Wiring;
 import ua.privat.paymantbusinesslogicservice.vilidators.Valid;
-import ua.privat.paymantbusinesslogicservice.services.WiringService;
+import ua.privat.paymantbusinesslogicservice.services.impl.WiringService;
+import ua.privat.utils.dto.WiringDTO;
+import ua.privat.utils.dto.convertor.WiringConverter;
+import ua.privat.utils.models.Wiring;
 
 @RestController
 @RequestMapping("api")
