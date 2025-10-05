@@ -1,31 +1,29 @@
 package ua.privat.paymantbusinesslogicservice.controllers;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ua.privat.paymantbusinesslogicservice.vilidators.Valid;
-import ua.privat.paymantbusinesslogicservice.services.impl.WiringService;
-import ua.privat.utils.dto.WiringDTO;
-import ua.privat.utils.dto.convertor.WiringConverter;
-import ua.privat.utils.models.Wiring;
+import ua.privat.clientlib.http.request.WiringRequest;
+import ua.privat.clientlib.http.response.WiringCreateResponse;
+import ua.privat.paymantbusinesslogicservice.services.WiringServiceI;
 
+/**
+ * Класс контроллер для работы с проводками
+ */
 @RestController
 @RequestMapping("api")
 @RequiredArgsConstructor
 public class WiringController {
+    // Сервис для работы с проводками
+    private final WiringServiceI wiringService;
 
-    private final Valid<Wiring> validator;
-    private final WiringConverter wiringConverter;
-    private final WiringService wiringService;
-
+    /**
+     * Создать проводку
+     *
+     * @param wiringRequest запрос на создание проводки
+     * @return WiringCreateResponse ответ API
+     */
     @PostMapping("/create-wiring")
-    public ResponseEntity<WiringDTO> createWiring(@RequestBody WiringDTO wiringDTO) {
-        Wiring wiring = validator.validate(wiringConverter.convertToModel(wiringDTO));
-        return wiringService.create(wiringConverter.convertToDTO(wiring));
-    }
-
-    @GetMapping("/reversal-wiring/{id}")
-    public ResponseEntity<WiringDTO> reversalWiring(@PathVariable Long id) {
-        return wiringService.updateStatus(id, "S");
+    public WiringCreateResponse createWiring(@RequestBody WiringRequest wiringRequest) {
+        return new WiringCreateResponse(this.wiringService.create(wiringRequest));
     }
 }

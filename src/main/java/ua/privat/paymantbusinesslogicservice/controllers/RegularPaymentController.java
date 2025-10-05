@@ -1,56 +1,75 @@
 package ua.privat.paymantbusinesslogicservice.controllers;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ua.privat.paymantbusinesslogicservice.exceptions.RegularPaymentsNotFoundException;
-import ua.privat.paymantbusinesslogicservice.services.impl.RegularPaymentService;
-import ua.privat.paymantbusinesslogicservice.vilidators.Valid;
-import ua.privat.utils.dto.RegularPaymentDTO;
-import ua.privat.utils.dto.WiringDTO;
-import ua.privat.utils.dto.convertor.RegularPaymentConvertor;
-import ua.privat.utils.models.RegularPayment;
+import ua.privat.clientlib.http.request.RegularPaymentInstructionsRequest;
+import ua.privat.clientlib.http.response.RegularPaymentCreateResponse;
+import ua.privat.clientlib.http.response.RegularPaymentListResponse;
+import ua.privat.clientlib.http.response.RegularPaymentResponse;
+import ua.privat.paymantbusinesslogicservice.services.RegularPaymentServiceI;
 
-import java.util.List;
-
+/**
+ * Класс контроллер для работы с инструкциями регулярных платежей
+ */
 @RestController
 @RequestMapping("api")
 @RequiredArgsConstructor
 public class RegularPaymentController {
+    // Сервис для работы с инструкциями регулярных платежей
+    private final RegularPaymentServiceI regularPaymentService;
 
-    private final Valid<RegularPayment> validator;
-    private final RegularPaymentConvertor regularPaymentConvertor;
-    private final RegularPaymentService regularPaymentService;
-
+    /**
+     * Создать инструкцию регулярного платежа
+     *
+     * @param regularPaymentInstructionsRequest запрос
+     * @return RegularPaymentCreateResponse ответ API
+     */
     @PostMapping("/create-regular-payment")
-    public ResponseEntity<RegularPaymentDTO> createPayment(@RequestBody RegularPaymentDTO regularPaymentDTO) {
-        RegularPayment regularPaymentValid = validator.validate(regularPaymentConvertor.convertToModel(regularPaymentDTO));
-        return regularPaymentService.createRegularPayment(regularPaymentConvertor.convertToDTO(regularPaymentValid));
+    public RegularPaymentCreateResponse createPayment(@RequestBody @Valid RegularPaymentInstructionsRequest regularPaymentInstructionsRequest) {
+        return new RegularPaymentCreateResponse(this.regularPaymentService.createRegularPayment(regularPaymentInstructionsRequest));
     }
 
-    @GetMapping("/write-off-payment")
-    public ResponseEntity<List<RegularPaymentDTO>> checkingTheNeedForWriteOff() {
-        return ResponseEntity.ok().body(regularPaymentService.getRegularPaymentsNeedsWrittenOff());
-    }
-
+    /**
+     * Получить регулярные платежи по плательщику
+     *
+     * @param payerId ID плательщика
+     * @return RegularPaymentListResponse ответ API
+     */
     @GetMapping("/regular-payment/payer")
-    public ResponseEntity<List<RegularPaymentDTO>> getAllPaymentsByPayerFullName(@RequestParam String payerFullName) {
-        List<RegularPaymentDTO> regularPaymentsList = regularPaymentService.getRegularPaymentsByPayerFullName(payerFullName);
-        if (regularPaymentsList.isEmpty()) throw new RegularPaymentsNotFoundException("With such a full name there are no regular payments!");
-        return ResponseEntity.ok().body(regularPaymentsList);
+    public RegularPaymentListResponse getAllPaymentsByPayerId(@RequestParam(name = "id") Long payerId) {
+        return new RegularPaymentListResponse(this.regularPaymentService.getRegularPaymentsByPayerId(payerId));
     }
 
+    /**
+     * Получить регулярные платежи по получателю
+     *
+     * @param recipientId ID получателя
+     * @return RegularPaymentListResponse ответ API
+     */
     @GetMapping("/regular-payment/recipient")
-    public ResponseEntity<List<RegularPaymentDTO>> getAllPaymentsByRecipientFullName(@RequestParam String recipientFullName) {
-        List<RegularPaymentDTO> regularPaymentsList = regularPaymentService.getRegularPaymentsByRecipientFullName(recipientFullName);
-        if (regularPaymentsList.isEmpty()) throw new RegularPaymentsNotFoundException("With such a recipient full name there are no regular payments!");
-        return ResponseEntity.ok().body(regularPaymentsList);
+    public RegularPaymentListResponse getAllPaymentsByRecipientId(@RequestParam(name = "id") Long recipientId) {
+        return new RegularPaymentListResponse(this.regularPaymentService.getRegularPaymentsByRecipientId(recipientId));
     }
 
-    @GetMapping("/wiring-write-off-history/{id}")
-    public ResponseEntity<List<WiringDTO>> paymentWriteOffHistory(@PathVariable Long id) {
-        List<WiringDTO> paymentWriteOffHistory = regularPaymentService.getPaymentWriteOffHistory(id);
-        if (paymentWriteOffHistory.isEmpty()) throw new RegularPaymentsNotFoundException("With such id there are no wiring!");
-        return ResponseEntity.ok().body(paymentWriteOffHistory);
+    /**
+     * Получить список регулярных платежей, которым требуется проводка
+     *
+     * @return RegularPaymentListResponse ответ API
+     */
+    @GetMapping("/regular-payment/need-to-write-off")
+    public RegularPaymentListResponse getPaymentNeedToWriteOff() {
+        return new RegularPaymentListResponse(this.regularPaymentService.getPaymentNeedToWriteOff());
+    }
+
+    /**
+     * Обновить дату списания
+     *
+     * @param paymentId ID платежа
+     * @return RegularPaymentResponse ответ API
+     */
+    @PatchMapping("/regular-payment/update-write-off-date")
+    public RegularPaymentResponse updateWriteOffDate(@RequestParam(name = "id") Long paymentId) {
+        return new RegularPaymentResponse(this.regularPaymentService.updateWriteOffDate(paymentId));
     }
 }
